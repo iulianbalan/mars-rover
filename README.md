@@ -1,26 +1,21 @@
 # mars-rover
+A squad of robotic rovers are to be landed by NASA on a plateau on Mars.
 
-##state.Map
-```text
+This plateau, which is curiously rectangular, must be navigated by the rovers so that their on-board cameras can get a complete view of the surrounding terrain to send back to Earth.
 
-+---+-----------------------------------+---+
-|   |               North               |   |
-+---+-----+-----+-----+-----+-----+-----+---+
-|   | 0 5 | 1 5 | 2 5 | 3 5 | 5 4 | 5 5 |   |
-|   +-----+-----+-----+-----+-----+-----+   |
-|   | 0 4 |     |     |     |     | 5 4 |   |
-|   +-----+-----+-----+-----+-----+-----+   |
-| W | 0 3 |     |     |     |     | 5 3 | E |
-| E +-----+-----+-----+-----+-----+-----+ A |
-| S | 0 2 |     |     |     |     | 5 2 | S |
-| T +-----+-----+-----+-----+-----+-----+ T |
-|   | 0 1 |     |     |     |     | 5 1 |   |
-|   +-----+-----+-----+-----+-----+-----+   |
-|   | 0 0 | 0 1 | 0 2 | 0 3 | 0 4 | 0 5 |   |
-+---+-----+-----+-----+-----+-----+-----+---+
-|   |               SOUTH               |   |
-+---+-----------------------------------+---+
-```
+
+
+A rover's position and location is represented by a combination of x and y coordinates and a letter representing one of the four cardinal compass points. The plateau is divided up into a grid to simplify navigation. An example position might be 0, 0, N, which means the rover is in the bottom left corner and facing North.
+
+
+
+In order to control a rover, NASA sends a simple string of letters. The possible letters are 'L', 'R' and 'M'. 'L' and 'R' makes the rover spin 90 degrees left or right respectively, without moving from its current spot.
+
+'M' means move forward one grid point, and maintain the same heading.
+
+
+
+Assume that the square directly North from (x, y) is (x, y+1).
 
 ## Test Input:
 
@@ -42,10 +37,31 @@ MMRMMRMRRM
 
 5 1 E
 
-## Input analyzer
+# Desired Map 
+```text
 
-### state.Position
-1 2 N
++---+-----------------------------------+---+
+|   |               North               |   |
++---+-----+-----+-----+-----+-----+-----+---+
+|   | 0 5 | 1 5 | 2 5 | 3 5 | 5 4 | 5 5 |   |
+|   +-----+-----+-----+-----+-----+-----+   |
+|   | 0 4 |     |     |     |     | 5 4 |   |
+|   +-----+-----+-----+-----+-----+-----+   |
+| W | 0 3 |     |     |     |     | 5 3 | E |
+| E +-----+-----+-----+-----+-----+-----+ A |
+| S | 0 2 |     |     |     |     | 5 2 | S |
+| T +-----+-----+-----+-----+-----+-----+ T |
+|   | 0 1 |     |     |     |     | 5 1 |   |
+|   +-----+-----+-----+-----+-----+-----+   |
+|   | 0 0 | 0 1 | 0 2 | 0 3 | 0 4 | 0 5 |   |
++---+-----+-----+-----+-----+-----+-----+---+
+|   |               SOUTH               |   |
++---+-----------------------------------+---+
+```
+
+# Input analyzer
+ 
+Initial position: 1 2 N
 
 ```text
 +---+-----------------------------------+---+
@@ -67,9 +83,9 @@ MMRMMRMRRM
 |   |               SOUTH               |   |
 +---+-----------------------------------+---+
 ```
-Processed input: ~~LM~~LMLMLMM
+Processed input: *~~LM~~* **LMLMLMM**
 
-Actual position: 0 2 E
+Actual position: 0 2 W
 ```text
 +---+-----------------------------------+---+
 |   |               North               |   |
@@ -89,7 +105,7 @@ Actual position: 0 2 E
 |   |               SOUTH               |   |
 +---+-----------------------------------+---+
 ```
-Processed input: ~~LMLM~~LMLMM
+Processed input: *~~LMLM~~* **LMLMM**
 
 Actual position: 0 1 S
 ```text
@@ -112,7 +128,7 @@ Actual position: 0 1 S
 |   |               SOUTH               |   |
 +---+-----------------------------------+---+
 ```
-Processed input: ~~LMLMLM~~LMM
+Processed input: *~~LMLMLM~~* **LMM**
 
 Actual position: 1 1 E
 ```text
@@ -134,7 +150,7 @@ Actual position: 1 1 E
 |   |               SOUTH               |   |
 +---+-----------------------------------+---+
 ```
-Processed input: ~~LMLMLMLMM~~
+Processed input: *~~LMLMLMLMM~~*
 
 Actual position: 1 3 N
 ```text
